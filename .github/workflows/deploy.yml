@@ -1,0 +1,38 @@
+name: Todo-List-FastAPI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          # If you have any
+
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{secrets.rnd_a1MLNoiu9xdAANHirq0NjU0qIWZ3}}
+        run: |
+           curl -X POST "https://api.render.com/deploy/srv-d21dejffte5s73ffsc8g?key=ZbpyMy5SsDk" \
+               -H "Authorization: Bearer $rnd_a1MLNoiu9xdAANHirq0NjU0qIWZ3" \
+               -H "Content-Type: application/json" \
+               -d '{}'
+
